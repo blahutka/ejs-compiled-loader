@@ -5,6 +5,7 @@ var ejs = require('ejs'),
   htmlmin = require('html-minifier'),
   merge = require('merge');
 
+ejs.delimiter = '?';
 
 module.exports = function (source) {
   this.cacheable && this.cacheable();
@@ -26,7 +27,7 @@ module.exports = function (source) {
     source = htmlmin.minify(source, opts['htmlminOptions'] || {});
   }
 
-  var template = ejs.compile(source, Object.assign({}, opts, { delimiter: '?' }));
+  var template = ejs.compile(source, opts);
 
   // Beautify javascript code
   if (!this.minimize && opts.beautify !== false) {

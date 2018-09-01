@@ -26,7 +26,7 @@ module.exports = function (source) {
     source = htmlmin.minify(source, opts['htmlminOptions'] || {});
   }
 
-  var template = ejs.compile(source, { delimiter: '?' });
+  var template = ejs.compile(source, Object.assign({}, opts, { delimiter: '?' }));
 
   // Beautify javascript code
   if (!this.minimize && opts.beautify !== false) {
